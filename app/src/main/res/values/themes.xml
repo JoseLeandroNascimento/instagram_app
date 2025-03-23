@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Instagram_app" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.Instagram_app" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+       <item name="colorPrimary">@color/gray</item>
+        <item name="colorPrimaryVariant">@color/gray_darker</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:statusBarColor">?attr/colorSecondary</item>
     </style>
 
     <style name="Theme.Instagram_app" parent="Base.Theme.Instagram_app" />
