@@ -60,6 +60,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:enabled="false"
                 android:id="@+id/login_btn_enter"
                 style="@style/Theme.Instagram_app.Button"
                 android:text="@string/enter" />
