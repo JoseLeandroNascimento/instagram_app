@@ -59,11 +59,11 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:enabled="false"
+            <com.example.instagram_app.login.view.LoadingButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/login_btn_enter"
-                style="@style/Theme.Instagram_app.Button"
-                android:text="@string/enter" />
+                app:text="@string/enter" />
 
             <FrameLayout
                 style="@style/Theme.Instagram_app.FormContainer"
