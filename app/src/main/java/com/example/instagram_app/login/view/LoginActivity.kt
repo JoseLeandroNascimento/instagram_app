@@ -10,35 +10,39 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.instagram_app.R
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.example.instagram_app.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
 
     private lateinit var button: LoadingButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_login)
+
+        binding = ActivityLoginBinding.inflate((layoutInflater))
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        button = findViewById<LoadingButton>(R.id.login_btn_enter)
+        button = binding.loginBtnEnter
 
-        val editTextEmail = findViewById<TextInputEditText>(R.id.login_edit_email)
-        val editTextPassword = findViewById<TextInputEditText>(R.id.login_edit_senha)
+        val editTextEmail = binding.loginEditEmail
+        val editTextPassword = binding.loginEditSenha
 
         editTextEmail.addTextChangedListener(walcher)
         editTextPassword.addTextChangedListener(walcher)
 
         button.setOnClickListener {
             button.showProgress(true)
-            findViewById<TextInputLayout>(R.id.login_edit_email_input).error = "E-mail é inválido"
-            findViewById<TextInputLayout>(R.id.login_edit_senha_input).error = "Senha é inválida"
+            binding.loginEditEmailInput.error = "E-mail é inválido"
+            binding.loginEditSenhaInput.error = "Senha é inválida"
             Handler(Looper.getMainLooper()).postDelayed({
                 button.showProgress(false)
             },2000)
