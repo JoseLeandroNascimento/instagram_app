@@ -10,11 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.instagram_app.R
+import com.example.instagram_app.common.base.DependencyInjector
 import com.example.instagram_app.common.util.TxtWatcher
 import com.example.instagram_app.databinding.ActivityLoginBinding
 import com.example.instagram_app.login.Login
-import com.example.instagram_app.login.data.FakeDataSource
-import com.example.instagram_app.login.data.LoginRepository
 import com.example.instagram_app.login.presentation.LoginPresenter
 import com.example.instagram_app.main.view.MainActivity
 
@@ -32,8 +31,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
         binding = ActivityLoginBinding.inflate((layoutInflater))
         setContentView(binding.root)
 
-        val repository = LoginRepository(FakeDataSource())
-        presenter = LoginPresenter(this, repository)
+        presenter = LoginPresenter(this, DependencyInjector.loginRepository())
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
