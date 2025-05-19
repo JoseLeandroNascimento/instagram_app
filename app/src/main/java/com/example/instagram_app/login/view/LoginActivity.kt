@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +17,14 @@ import com.example.instagram_app.databinding.ActivityLoginBinding
 import com.example.instagram_app.login.Login
 import com.example.instagram_app.login.presentation.LoginPresenter
 import com.example.instagram_app.main.view.MainActivity
+import com.example.instagram_app.register.view.RegisterActivity
 
 class LoginActivity : AppCompatActivity(), Login.View {
 
     private lateinit var binding: ActivityLoginBinding
     override lateinit var presenter: Login.Presenter
 
+    private lateinit var loginTxtRegister: TextView
     private lateinit var button: LoadingButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
         }
 
         button = binding.loginBtnEnter
+        loginTxtRegister = binding.loginTxtRegister
 
         val editTextEmail = binding.loginEditEmail
         val editTextPassword = binding.loginEditSenha
@@ -65,6 +69,15 @@ class LoginActivity : AppCompatActivity(), Login.View {
                 button.showProgress(false)
             }, 2000)
         }
+
+        loginTxtRegister.setOnClickListener {
+            goToRegisterScreen()
+        }
+
+    }
+
+    private fun goToRegisterScreen() {
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 
     override fun onDestroy() {
