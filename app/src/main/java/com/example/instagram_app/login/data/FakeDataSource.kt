@@ -2,6 +2,7 @@ package com.example.instagram_app.login.data
 
 import android.os.Handler
 import android.os.Looper
+import com.example.instagram_app.common.model.Database
 
 class FakeDataSource : LoginDataSource {
 
@@ -9,11 +10,23 @@ class FakeDataSource : LoginDataSource {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
-            if (email == "teste@gmail.com" && password == "12345678") {
-                callback.onSuccess()
-            } else {
-                callback.onFailure("Usuário não encontrado")
+            val userAuth = Database.usersAuth.firstOrNull { user ->
+                email == user.email
             }
+
+            when {
+                userAuth == null -> {
+                    callback.onFailure("Usuário não encontrado")
+                }
+                userAuth.password != password -> {
+                    callback.onFailure("Senha está incorreta")
+                }
+                else -> {
+                    Database.sessionAuth = userAuth
+                    callback.onSuccess(userAuth)
+                }
+            }
+
             callback.onComplete()
         }, 2000)
     }
