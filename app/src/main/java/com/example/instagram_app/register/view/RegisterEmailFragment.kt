@@ -1,5 +1,6 @@
 package com.example.instagram_app.register.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -12,6 +13,8 @@ import com.example.instagram_app.register.presentation.RegisterEmailPresenter
 
 class RegisterEmailFragment() :
     Fragment(R.layout.fragment_register_email), RegisterEmail.View {
+
+    private var fragmentAttachListener: FragmentAttachListener? = null
 
     private var binding: FragmentRegisterEmailBinding? = null
     override lateinit var presenter: RegisterEmail.Presenter
@@ -41,6 +44,13 @@ class RegisterEmailFragment() :
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FragmentAttachListener) {
+            fragmentAttachListener = context
+        }
+    }
+
     private val walcher = TxtWatcher {
         binding?.registerBtnNext?.isEnabled = binding?.registerEditEmail?.text.toString()
             .isNotEmpty() && binding?.registerEditEmail?.text.toString().isNotEmpty()
@@ -60,12 +70,13 @@ class RegisterEmailFragment() :
 
     override fun goToNameAndPasswordScreen(email: String) {
 
-
+        fragmentAttachListener?.goTONameAndPasswordScreen(email)
     }
 
     override fun onDestroy() {
         binding = null
         presenter.onDestroy()
+        fragmentAttachListener = null
         super.onDestroy()
     }
 }
