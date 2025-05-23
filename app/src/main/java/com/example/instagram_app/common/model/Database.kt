@@ -12,6 +12,7 @@ object Database {
         usersAuth.add(
             UserAuth(
                 uuid = UUID.randomUUID().toString(),
+                name = "userA",
                 email = "userA@gmail.com",
                 password = "12345678"
             )
@@ -20,6 +21,7 @@ object Database {
         usersAuth.add(
             UserAuth(
                 uuid = UUID.randomUUID().toString(),
+                name = "userB",
                 email = "userB@gmail.com",
                 password = "87654321"
             )

@@ -7,4 +7,13 @@ class RegisterEmailRepository(
     fun create(email: String, loginCallback: RegisterEmailCallback) {
         dataSource.create(email, loginCallback)
     }
+
+    fun create(
+        email: String,
+        name: String,
+        password: String,
+        loginCallback: RegisterEmailCallback
+    ) {
+        dataSource.create(email, loginCallback)
+    }
 }
